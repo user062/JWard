@@ -9,16 +9,18 @@ import JWard.Dot;
 import java.util.ArrayList;
 import JWard.Segment;
 import javax.swing.JSpinner;
+import java.awt.Color;
+import javax.swing.JColorChooser;
 
 
 public class Canvas extends JPanel {
     private ArrayList<Segment> segments = new ArrayList<Segment>();
 
-    public Canvas(JSpinner strokeSpinner){
+    public Canvas(JSpinner strokeSpinner, JColorChooser colorChooser){
         addMouseListener(new MouseAdapter() {
                 public void mousePressed(MouseEvent event) {
                     Dot dot = new Dot(event.getX(), event.getY());
-                    segments.add(new Segment(dot, dot, (int)strokeSpinner.getValue()));
+                    segments.add(new Segment(dot, dot, (int)strokeSpinner.getValue(), (Color)colorChooser.getColor()));
                     Canvas.super.repaint();
                 }
             });
@@ -26,7 +28,8 @@ public class Canvas extends JPanel {
         addMouseMotionListener(new MouseAdapter() {
                 public void mouseDragged(MouseEvent event) {
                     Dot dot = new Dot(event.getX(), event.getY());
-                    segments.add(new Segment(segments.get(segments.size() - 1).getEnd(), dot, (int)strokeSpinner.getValue()));
+                    segments.add(new Segment(segments.get(segments.size() - 1).getEnd(), dot, (int)strokeSpinner.getValue(),
+                                                                                              (Color)colorChooser.getColor()));
                     Canvas.super.repaint();
                 }
             });
