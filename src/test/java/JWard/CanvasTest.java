@@ -8,6 +8,5 @@ import JWard.Canvas;
 
 public class CanvasTest {
     @Test public void testFrame() {
-        Canvas canvas = new Canvas();
     }
 }
